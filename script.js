@@ -39,27 +39,28 @@ function removerItem(id) {
     window.location.reload(true);
 }
 
-
 function loadData() {
-    fetch('https://a45b8fd0-560e-457e-8382-84745213fafd-00-1r1aimao64pwu.spock.replit.dev/load')
-    .then(response => response.json())
-    .then(data => {
-        const dataList = document.getElementById('dataList');
-        dataList.innerHTML = ''; // Limpa a lista existente
-        data.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `Chave: ${item.key}, Valor: ${item.value}`;
+    const url =
+        "https://a45b8fd0-560e-457e-8382-84745213fafd-00-1r1aimao64pwu.spock.replit.dev";
+    fetch(`${url}/load`)
+        .then((response) => response.json())
+        .then((data) => {
+            const dataList = document.getElementById("dataList");
+            dataList.innerHTML = ""; // Limpa a lista existente
+            data.forEach((item) => {
+                const li = document.createElement("li");
+                li.textContent = `Chave: ${item.key}, Valor: ${item.value}`;
 
-            // Botão para excluir o item
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Excluir';
-            deleteButton.onclick = () => deleteData(item.key);
+                // Botão para excluir o item
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Excluir";
+                deleteButton.onclick = () => deleteData(item.key);
 
-            li.appendChild(deleteButton);
-            dataList.appendChild(li);
-        });
-    })
-    .catch(error => console.error('Erro ao carregar dados:', error));
+                li.appendChild(deleteButton);
+                dataList.appendChild(li);
+            });
+        })
+        .catch((error) => console.error("Erro ao carregar dados:", error));
 }
 
 loadData();
